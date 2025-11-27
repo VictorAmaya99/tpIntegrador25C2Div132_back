@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/VictorAmaya99/tpIntegrador25C2Div132_back#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
     "mysql2": "^3.15.3",
     "nodemon": "^3.1.11"
