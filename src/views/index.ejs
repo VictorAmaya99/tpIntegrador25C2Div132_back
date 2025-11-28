@@ -1,23 +1,15 @@
+
 <%- include("partials/head.ejs") %>
-<%- include("partials/nav.ejs") %>
+<%- include("partials/header-logo.ejs") %>
 
 <main>
-    <h1> <%= about %> </h1>
-    <hr>
-    <div id="contenedor-productos">
+    <h1>Bienvenido</h1>
+    <p>Ingresa tu nombre para continuar:</p>
 
-        <!-- Vamos a iterar el array de productos que le pasamos desde el endpoint -->
-        <% products.forEach(prod => { %>
-            <div class="card-producto">
-                <img src="<%= prod.imagen %>" alt="<%= prod.nombre %>">
-                <h5><%= prod.nombre %></h5>
-                <p>Id: <%= prod.id %></p>
-                <p> <%= prod.tipo %> </p>
-                <p>$<%= prod.precio %></p>
-            </div>
-        <% }) %>
-
-    </div>
+    <form action="/guardar-nombre" method="POST">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <button type="submit">Entrar</button>
+    </form>
 </main>
 
 <%- include("partials/footer.ejs") %>

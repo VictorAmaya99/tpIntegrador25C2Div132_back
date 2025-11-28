@@ -27,6 +27,9 @@ import connection from "./src/api/database/db.js";
 // Importamos bcrypt
 import bcrypt from "bcrypt";
 
+import path from "path";
+import dotenv from "dotenv";
+
 /*===================
     Middlewares
 ===================*/
@@ -67,24 +70,44 @@ app.get("/", (req, res) => {
     res.send("TP Integrador");
 });
 
+app.get("/index", (req, res) => {
+    res.render("index", {
+        title: "Indice",
+        about: "Bienvenido"
+    });
+});
+
+app.post("/guardar-nombre", (req, res) => {
+    const { nombre } = req.body;
+
+    //Guardamos en sesion
+    req.session.nombreUsuario = nombre;
+
+    //redirigimos a productos
+    res.redirect("/productos");
+});
+
 // Devolveremos vistas 
-app.get("/index", async (req, res) => {
+app.get("/productos", async (req, res) => {
     try {
 
         const [rows] = await connection.query("SELECT * FROM productos");
+
+        const nombre = req.session.nombreUsuario;
         
-        res.render("index",{
-            title: "Indice",
+        res.render("productos",{
+            title: "Productos",
             about: "Listado productos",
+            nombre,
             products: rows
         });  // Le devolvemos la pagina index.ejs
 
     } catch (error) {
         console.log(error);
-    }
-
-    
+    }    
 });
+
+
 
 app.get("/consultar", (req, res) => {
     res.render("consultar", {
@@ -208,7 +231,7 @@ app.post("/logout", (req, res) => {
             });
         }
 
-        res.redirect("/login");
+        res.redirect("/index");
     });
 });
 
