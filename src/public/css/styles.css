@@ -1,4 +1,123 @@
-/* Para la pagina principal */
+/*================
+    General
+================*/
+header {
+    margin-top: 30px;
+}
+
+ul {
+    padding-left: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+
+/*================
+    Encabezado
+================*/
+nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*================
+    main
+================*/
+#contenedor-productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid;
+    width: 175px;
+    height: 200px;
+    margin: 5px;
+    font-size: 12px;
+    text-align: center;
+    justify-content: space-evenly;
+}
+
+#contenedor-productos h5, #contenedor-productos p {
+    margin: 0;
+}
+
+.card-producto img {
+    width: 65px;
+}
+
+
+#listado-productos {
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+}
+
+.li-listados {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+}
+
+.li-listados img {
+    width: 65px;
+}
+
+.li-listados p, .li-listados img {
+    margin-bottom: 0;
+}
+
+.li-botonera {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.products-form {
+    width: 35%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 110px;
+    justify-content: space-between;
+}
+
+.products-form-amplio {
+    width: 50%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.mensaje-error strong {
+    color: #ae4f4e;
+}
+
+.mensaje-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border: 2px solid #ebccd1;
+    padding: 10px 30px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+
+
+
+
+/* Para la pagina principal
 
 
 header,
@@ -69,7 +188,7 @@ body{
 }
 
 /* Para la pagina de los productos */
-
+/*
 .pagina-productos{
     background-color: rgb(210, 207, 207);
     margin: 0;
@@ -94,11 +213,11 @@ body{
     text-align: center;
     max-width: 250px;
     background-color: #f5f5f5; 
-}
+}*/
 
-.pagina-productos .producto img{    
+/*.pagina-productos .producto img{    
     /* max-width: 100%; */
-    width: 250px;
+    /*width: 250px;
     height: 250px;
     object-fit:contain;
     display: block;
@@ -117,7 +236,7 @@ body{
 
 /* Para la pagina de los carritos*/
 
-.pagina-carrito{
+/*.pagina-carrito{
     margin: 0;
     padding: 0;
     background-color: bisque;
@@ -131,4 +250,4 @@ body{
 
 .pagina-carrito .texto-carrito{
     margin-left: 10px;
-}
+} */
