@@ -11,14 +11,14 @@
         <input type="text" name="nombre" id="nombreProd" required>
         <br>
 
-        <label for="img_urlProd">Imagen</label>
-        <input type="text" name="img_url" id="img_urlProd" required>
+        <label for="imagenProd">Imagen</label>
+        <input type="text" name="imagen" id="imagenProd" required>
         <br>
 
         <label for="tipoProd">Tipo</label>
         <select name="tipo" id="tipoProd" required>
-            <option value="femenino">Categoria 1</option>
-            <option value="masculino">Categoria 2</option>
+            <option value="femenino">femenino</option>
+            <option value="masculino">masculino</option>
         </select>
         <br>
 
@@ -31,11 +31,8 @@
     </form>
 
     <hr>
-    <div id="contenedor-productos"></div>
 
-    <hr>
-    
-    <!-- Formulario para crear usuarios y enviarlos a /api/users -->
+       <!-- Formulario para crear usuarios y enviarlos a /api/users -->
      <h3>Alta usuarios</h3>
     <form id="altaUsers-container">
         <label for="nombreUser">Nombre</label>
@@ -49,8 +46,13 @@
 
         <input type="submit" value="Crear usuario">
     </form>
+
+
+        <hr>
+        <div id="contenedor-productos"></div>
 </main>
 
+    
 <script src="js/crear.js"></script>
 
 <%- include("partials/footer.ejs") %>

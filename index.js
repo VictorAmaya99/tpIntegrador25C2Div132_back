@@ -7,28 +7,26 @@ const app = express(); // app es la instancia de la aplicación Express y contie
 
 import environments from "./src/api/config/environments.js"; // Traemos las variables de entorno para extraer la puerta
 const PORT = environments.port;
-const session_key = environments.session_key;
 
 import cors from "cors"; // Importamos cors para poder usar sus metodos y permitir solicitudes de otras aplicaciones
 
 // Importamos los middlewares
-import { loggerUrl } from "./src/api/middlewares/middlewares.js";
+import { loggerUrl, requireLogin } from "./src/api/middlewares/middlewares.js";
 
 //Importamos las rutas de producto
-import { productRoutes, viewRoutes, userRoutes} from "./src/api/routes/index.js";
+import { productRoutes } from "./src/api/routes/index.js";
+// import { productRoutes, viewRoutes, userRoutes} from "./src/api/routes/index.js";
 
 // Importamos la configuración para trabajar con rutas y archivos estaticos
 import { join, __dirname } from "./src/api/utils/index.js";
-
-import session from "express-session"; // Importamos session despues de instalar npm i express-session
-
 import connection from "./src/api/database/db.js";
 
-// Importamos bcrypt
-import bcrypt from "bcrypt";
+import session from "express-session"; // Importamos session despues de instalar npm i express-session
+const SESSION_KEY = environments.session_key;
 
-import path from "path";
-import dotenv from "dotenv";
+// Importamos bcrypt
+// import bcrypt from "bcrypt";
+
 
 /*===================
     Middlewares
@@ -39,14 +37,29 @@ app.use(cors());
 // Middleware logger
 app.use(loggerUrl); //Lo que hace es que por cada petición y cada respuesta devolver que tipo de operacion se hizo. funcion que consologuea todo el registro de la aip res
 
-
 app.use(express.json()); // Midleware que convierte los datos "application/json" que nos proporciona la cabecera (header) de las solicitudes POST y PUT, los pasa de json a objetos JS. Recibe cuando estamos recibiendo informacion de un post y un put y los convierte en objeto javascript para en nuestro endpoint recibir eso como objetos, convierte el texto plano que recibimos en json a objetos javascript
+
+// Middleware para parsear las solicitudes POST que enviamos desde el <form> HTML
+app.use(express.urlencoded({ extended: true }));
 
 // Middleware para servir archivos estaticos: construimos la ruta relativa para servir los archivos de la carpeta /public
 app.use(express.static(join(__dirname, "src", "public"))) // Gracias a este middleware podemos servir los archivos de la carpeta public, como http://localhost:3000/img/prod1.jpg
 
-// Middleware para parsear las solicitudes POST que enviamos desde el <form> HTML
-app.use(express.urlencoded({ extended: true }));
+/*=========================
+    Sesiones en Express
+===========================*/
+
+// Middleware de sesion, cada vez que un usuario hace una solicitud HTTP, se gestionara su sesion mediante el middleware
+app.use(session({
+    secret: SESSION_KEY, // Firma las cookies para evitar manipulacion por el cliente, clave para la seguridad de la aplicaciones, este valor se usa para FIRMAR las cookies de sesion para que el servidor verifique que los datos no fueron alterados por el cliente
+    resave: false, // Evita guardar la sesion si no hubo cambios
+    saveUninitialized: true // No guarda sesiones vacias
+}));
+
+app.use((req, res, next) => {
+    res.locals.nombre = req.session?.nombreUsuario ?? null;
+    next();
+});
 
 /*===================
     Configuracion
@@ -54,26 +67,53 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs"); // Configuramos EJS como motor de plantillas
 app.set("views", join(__dirname, "src", "views")); //Le indicamos la ruta donde almacenamos las vistas en ejs
 
-//Middleware de sesion
-app.use(session({
-    secret: session_key,
-    resave: false,
-    saveUninitialized: true
-}));
 
 /*===================
     Endpoints
 =====================*/
 
-app.get("/", (req, res) => {
-    // Tipo de respuesta en texto plano
-    res.send("TP Integrador");
+//Ahora las rutas las gestiona el middleware Router
+app.use("/api/productos/", productRoutes);
+
+//Devolvemos vistas
+app.get("/", async (req, res) => {
+    try {
+        const [rows] = await connection.query("SELECT * FROM productos");
+        
+        // Le devolvemos la pagina index.ejs
+        res.render("bienvenida", {
+            title: "Bienvenida",
+            about: "Lista de productos",
+            products: rows
+        }); 
+
+    } catch (error) {
+        console.log(error);
+    }
 });
 
-app.get("/index", (req, res) => {
-    res.render("index", {
-        title: "Indice",
-        about: "Bienvenido"
+app.get("/productos", async (req, res) => {
+    try {
+        const [rows] = await connection.query("SELECT * FROM productos");
+        
+        // Le devolvemos la pagina productos.ejs
+        res.render("productos", {
+            title: "Productos",
+            about: "Lista de productos",
+            products: rows,
+            nombre: req.session?.nombreUsuario
+        }); 
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get("/bienvenida", (req, res) => {
+    res.render("bienvenida", {
+        title: "Bienvenida",
+        about: "Bienvenida a nuestra tiendita",       
+        nombre: req.session?.nombreUsuario
     });
 });
 
@@ -86,27 +126,6 @@ app.post("/guardar-nombre", (req, res) => {
     //redirigimos a productos
     res.redirect("/productos");
 });
-
-// Devolveremos vistas 
-app.get("/productos", async (req, res) => {
-    try {
-
-        const [rows] = await connection.query("SELECT * FROM productos");
-
-        const nombre = req.session.nombreUsuario;
-        
-        res.render("productos",{
-            title: "Productos",
-            about: "Listado productos",
-            nombre,
-            products: rows
-        });  // Le devolvemos la pagina index.ejs
-
-    } catch (error) {
-        console.log(error);
-    }    
-});
-
 
 
 app.get("/consultar", (req, res) => {
@@ -137,18 +156,31 @@ app.get("/eliminar", (req, res) => {
     });
 });
 
+app.get("/login", (req, res) => {
+    res.render("login", {
+        title: "Login",
+        about: "Login dashboard"
+    });
+});
+
+app.get("/carrito", (req, res) => {
+    res.render("carrito", {
+        title: "Carrito",
+        about: "Productos en el carrito"
+    });
+});
+
+
 /*======================
     Rutas
 ======================*/
 
-//Ahora las rutas las gestiona el middleware Router
-app.use("/api/productos/", productRoutes);
 
-//Rutas vista
-app.use("/", viewRoutes);
+// //Rutas vista
+// app.use("/", viewRoutes);
 
-//Rutas usuarios
-app.use("/api/usuarios", userRoutes);
+// //Rutas usuarios
+// app.use("/api/usuarios", userRoutes);
 
 app.post("/login", async (req, res) => {
     try {
@@ -158,6 +190,7 @@ app.post("/login", async (req, res) => {
         if(!correo || !password) {
             return res.render("login", {
                 title: "login",
+                about: "Login dashboard",
                 error: "Todos los campos son necesarios!"
             });
         }
@@ -168,14 +201,15 @@ app.post("/login", async (req, res) => {
         // const [rows] = await connection.query(sql, [email, password]);
 
         // Bcrypt I -> Sentencia con bcrypt, traemos solo el email
-        const sql = "SELECT * FROM usuarios where correo = ?";
-        const [rows] = await connection.query(sql, [correo]);
+        const sql = "SELECT * FROM usuarios where correo = ? AND password = ?";
+        const [rows] = await connection.query(sql, [correo, password]);
 
 
         // Si no recibimos nada, es porque no se encuentra un usuario con ese email o password
         if(rows.length === 0) {
             return res.render("login", {
                 title: "Login",
+                about: "Login dashboard",
                 error: "Error! Email o password no validos"
             });
         }
@@ -185,28 +219,35 @@ app.post("/login", async (req, res) => {
         console.table(user);
 
         // Bcrypt II -> Comparamos el password hasheado (la contraseña del login hasheada es igual a la de la BBDD?)
-        const match = await bcrypt.compare(password, user.password); // Si ambos hashes coinciden, es porque coinciden las contraseñas y match devuelve true
+        // const match = await bcrypt.compare(password, user.password); // Si ambos hashes coinciden, es porque coinciden las contraseñas y match devuelve true
 
-        console.log(match);
+        // console.log(match);
 
-        if(match) {            
-            // Guardamos la sesion
-            req.session.user = {
-                id: user.id,
-                name: user.name,
-                email: user.email
-            }
+    //     if(match) {            
+    //         // Guardamos la sesion
+    //         req.session.user = {
+    //             id: user.id,
+    //             name: user.name,
+    //             email: user.email
+    //         }
     
-            // Una vez guardada la sesion, vamos a redireccionar al dashboard
-            res.redirect("/");
+    //         // Una vez guardada la sesion, vamos a redireccionar al dashboard
+    //         res.redirect("/");
 
-        } else {
-            return res.render("login", {
-                title: "Login",
-                error: "Epa! Contraseña incorrecta"
-            });
+    //     } else {
+    //         return res.render("login", {
+    //             title: "Login",
+    //             error: "Epa! Contraseña incorrecta"
+    //         });
+    //     }
+         // Con el email y el password validos, guardamos la sesion
+        req.session.user = {
+            id: user.id,
+            nombre: user.nombre,
+            email: user.email
         }
 
+        res.redirect("/"); // Redirigimos a la pagina principal
 
     } catch (error) {
         console.log("Error en el login: ", error);
@@ -214,7 +255,7 @@ app.post("/login", async (req, res) => {
         res.status(500).json({
             error: "Error interno del servidor"
         });
-    }
+     }
 });
 
 
@@ -231,7 +272,7 @@ app.post("/logout", (req, res) => {
             });
         }
 
-        res.redirect("/index");
+        res.redirect("/login");
     });
 });
 

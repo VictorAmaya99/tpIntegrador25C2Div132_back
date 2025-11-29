@@ -22,7 +22,7 @@ getProducts_form.addEventListener("submit", async (event) => {
 
     try {
         // Hago el fetch a la url personalizada
-        let response = await fetch(`http://localhost:3001/api/productos/${idProducto}`);
+        let response = await fetch(`http://localhost:3000/api/productos/${idProducto}`);
         console.log(response);
 
         // Proceso los datos que me devuelve el servidor
@@ -81,8 +81,8 @@ function mostrarProducto(producto) {
 
 // Funcion para eliminar un producto
 async function eliminarProducto(id) {
-    let url = "http://localhost:3001/api/productos";
-    try {        
+    let url = "http://localhost:3000/api/productos";
+    try {
 
         console.log(`Haciendo peticion DELETE a ${url}/${id}`);
         let response = await fetch(`${url}/${id}`, {

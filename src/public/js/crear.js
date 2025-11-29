@@ -1,43 +1,6 @@
 let altaProducts_form = document.getElementById("altaProducts-form");
-let altaUsers_container = document.getElementById("altaUsers-container");
-let url = "http://localhost:3001";
+let url = "http://localhost:3000/api/productos";
 
-// Alta Usuarios
-altaUsers_container.addEventListener("submit", async event => {
-    event.preventDefault();
-
-    let formData = new FormData(event.target); // Transformamos en objeto FormData los campos del formulario
-
-    let data = Object.fromEntries(formData.entries()); // Transformamos a objeto JS el objeto FormData
-
-    console.log(data);
-
-    // Vamos a enviar los datos de nuestro usuario al endpoint /api/users
-    try {
-        let response = await fetch(`${url}/api/usuarios`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        });
-
-        if(response.ok) {
-            console.log(response);
-
-            let result = await response.json();
-            console.log(result);
-            alert(result.message)
-        }
-
-    } catch(error) { // El catch solo captura errores de red
-        console.error("Error al enviar los datos: ", error);
-        alert("Error al procesar la solicitud");
-    }
-});
-
-
-//Alta productos
 altaProducts_form.addEventListener("submit", event => {
 
     event.preventDefault(); // Evitamos el envio por defecto del formulario
@@ -62,7 +25,7 @@ altaProducts_form.addEventListener("submit", event => {
     */
 
     // Los datos se enviaran asi, como JSON, parseando nuestros valores de objeto JS
-    console.log(data);
+    console.log(JSON.stringify(data));
     /*{
         "name":"Manaos Pomelo",
         "image":"https://live.staticflickr.com/65535/52470400378_52f5664294_m.jpg",
@@ -80,7 +43,7 @@ async function enviarProducto(data) {
 
     try {
         // let url = "http://localhost:3000/api/products"
-        let response = await fetch(`${url}/api/productos`, {
+        let response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -109,6 +72,4 @@ async function enviarProducto(data) {
         alert("Error al procesar la solicitud");
     }
 }
-
-
 

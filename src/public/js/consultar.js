@@ -1,6 +1,6 @@
 let getProducts_form = document.getElementById("getProducts-form");
 let listado_productos = document.getElementById("listado-productos");
-let url = "http://localhost:3001/api/productos";
+let url = "http://localhost:3000/api/productos";
 
 
 getProducts_form.addEventListener("submit", async (event) => {
@@ -28,7 +28,7 @@ getProducts_form.addEventListener("submit", async (event) => {
         console.log(`Realizamos una peticion GET a ${url}/${idProducto}`);
         
         // Hago el fetch a la url personalizada
-        let response = await fetch(`http://localhost:3001/api/productos/${idProducto}`);
+        let response = await fetch(`http://localhost:3000/api/productos/${idProducto}`);
         console.log(response);
 
         // Proceso los datos que me devuelve el servidor
@@ -68,8 +68,8 @@ function mostrarProducto(producto) {
 
     let htmlProducto = `
         <li class="li-listados">
-            <img src="${producto.imagen}" alt="${producto.nombre}" class="img-listados">
-            <p>Id: ${producto.id}/ Nombre: ${producto.nombre}/ <strong>Precio: $${producto.precio}</strong></p>
+            <img src="${producto.imagen}" alt="${producto.name}" class="img-listados">
+            <p>Id: ${producto.id}/ Nombre: ${producto.name}/ <strong>Precio: $${producto.precio}</strong></p>
         </li>
         `;
 

@@ -1,0 +1,23 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header-completo") %>
+
+<main>
+    <h2><%= about %></h2>
+
+    <div id="carrito-container">
+        <main class="texto-carrito">
+            <h2>Carrito</h2>
+            <p id="contador-carrito">Cantidad: 0 productos</p>           
+            <div id="carrito-items"></div>
+            <p>Total: $<span id="total">0</span></p>
+            <button id="pagar">Pagar</button>
+            <button id="btn-vaciar" class="btn-vaciar">Vaciar carrito</button>
+        </main>
+
+    </div>    
+</main>
+
+
+<script src="/js/carrito.js"></script>
+
+<%- include("partials/footer.ejs") %>

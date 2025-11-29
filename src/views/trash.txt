@@ -1,24 +1,28 @@
+viene de crear.ejs
+    <!-- Formulario para crear usuarios y enviarlos a /api/users -->
+     <h3>Alta usuarios</h3>
+    <form id="altaUsers-container">
+        <label for="nombreUser">Nombre</label>
+        <input type="text" name="nombre" id="nombreUser" required>
 
-<%- include("partials/head.ejs") %>
-<%- include("partials/header.ejs") %>
+        <label for="emailUser">Email</label>
+        <input type="email" name="correo" id="emailUser" required>
 
-<main>
-    <h1> <%= about %> </h1>
-    <hr>
-    <div id="contenedor-productos" class="productos-grid">
+        <label for="passwordUser">Password</label>
+        <input type="password" name="password" id="passwordUser" required>
 
-        <!-- Vamos a iterar el array de productos que le pasamos desde el endpoint -->
-        <% products.forEach(prod => { %>
-            <div class="card-producto">
-                <img src="<%= prod.imagen %>" alt="<%= prod.nombre %>">
-                <h5><%= prod.nombre %></h5>
-                <p>Id: <%= prod.id %></p>
-                <p> <%= prod.tipo %> </p>
-                <p>$<%= prod.precio %></p>
-            </div>
-        <% }) %>
+        <input type="submit" value="Crear usuario">
+    </form>
 
-    </div>
-</main>
 
-<%- include("partials/footer.ejs") %>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/bamboo.css" type="text/css">
+    <title> <%= title %> </title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body> -->

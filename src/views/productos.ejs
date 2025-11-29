@@ -19,9 +19,18 @@
                 <p>Id: <%= prod.id %></p>
                 <p>Tipo: <%= prod.tipo %></p>
                 <p>$<%= prod.precio %></p>
+                
+                <button class="btn-carrito" data-id="<%= prod.id %>">Agregar al carrito</button>
+
             </div>
         <% }) %>
     </div>
 </main>
+
+
+
+<!-- <script src="/js/carrito.js"></script> -->
+
+
 
 <%- include("partials/footer.ejs") %>
