@@ -81,8 +81,8 @@ app.get("/", async (req, res) => {
         const [rows] = await connection.query("SELECT * FROM productos");
         
         // Le devolvemos la pagina index.ejs
-        res.render("bienvenida", {
-            title: "Bienvenida",
+        res.render("index", {
+            title: "Index",
             about: "Lista de productos",
             products: rows
         }); 
@@ -90,41 +90,6 @@ app.get("/", async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-});
-
-app.get("/productos", async (req, res) => {
-    try {
-        const [rows] = await connection.query("SELECT * FROM productos");
-        
-        // Le devolvemos la pagina productos.ejs
-        res.render("productos", {
-            title: "Productos",
-            about: "Lista de productos",
-            products: rows,
-            nombre: req.session?.nombreUsuario
-        }); 
-
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-app.get("/bienvenida", (req, res) => {
-    res.render("bienvenida", {
-        title: "Bienvenida",
-        about: "Bienvenida a nuestra tiendita",       
-        nombre: req.session?.nombreUsuario
-    });
-});
-
-app.post("/guardar-nombre", (req, res) => {
-    const { nombre } = req.body;
-
-    //Guardamos en sesion
-    req.session.nombreUsuario = nombre;
-
-    //redirigimos a productos
-    res.redirect("/productos");
 });
 
 
