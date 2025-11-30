@@ -1,3 +1,6 @@
+/* 
+    Controladores usuarios
+*/
 import bcrypt from "bcrypt";
 import UserModels from "../models/user.models.js";
 

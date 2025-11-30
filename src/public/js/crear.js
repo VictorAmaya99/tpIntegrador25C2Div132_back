@@ -1,6 +1,51 @@
 let altaProducts_form = document.getElementById("altaProducts-form");
-let url = "http://localhost:3000/api/productos";
+let altaUsers_container = document.getElementById("altaUsers-container");
+let url = "http://localhost:3000";
 
+//Alta usuarios
+altaUsers_container.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    let formData = new FormData(event.target); //Transformamos en objeto formdata los campos del formulario
+
+    let data = Object.fromEntries(formData.entries()); //Transformamos a objeto Js el objeto FormData  
+
+    console.log(data);
+
+    //Vamos a enviar los datos de nuestro usuario al endpoint /api/users
+    try {
+        
+        let response = await fetch(`${url}/api/usuarios`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        console.log(response);
+
+        // Procesamos la respuesta que nos devuelve
+        let result = await response.json();
+        console.log(result);
+
+        // Vamos a verificar si la conexion fue exitosa con un "200" OK o "201" Created
+        if(response.ok) {
+            console.log(result.message);
+            alert(result.message);
+
+        } else { // En caso de que haya otra respuesta distinta de ok
+            console.error(result.message);
+            alert(result.message);
+        }
+
+        } catch (error) {
+            console.error("Error al enviar los datos: ", error);
+            alert("Error al procesar la solicitud");
+        }
+});
+
+//Alta productos
 altaProducts_form.addEventListener("submit", event => {
 
     event.preventDefault(); // Evitamos el envio por defecto del formulario
@@ -43,7 +88,7 @@ async function enviarProducto(data) {
 
     try {
         // let url = "http://localhost:3000/api/products"
-        let response = await fetch(url, {
+        let response = await fetch(`${url}/api/productos`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -1,36 +1,45 @@
 <%- include("partials/head.ejs") %>
+<%- include("partials/header-logo.ejs") %>
 
-<h1>Login dashboard</h1>
-<!-- Mostramos el mensaje de error del endpoint -->
-<% if (typeof error !== "undefined") { %>
-    <div class="error-message">
-        <%= error %>
-    </div>
-<% } %>
+<main id="login-container">
+    <h1>Login dashboard</h1>
+    <!-- Mostramos el mensaje de error del endpoint -->
+    <% if (typeof error !== "undefined") { %>
+        <div class="error-message">
+            <%= error %>
+        </div>
+    <% } %> 
 
-<form action="/login" method="POST" autocomplete="off" id="login-form">
+    <form action="/login" method="POST" autocomplete="off" id="login-form">
 
-    <label for="emailUser">Correo</label>
-    <input type="email" name="email" id="emailUser" required>
+        <label for="correoUser">Correo</label>
+        <input type="email" name="correo" id="correoUser" required>
 
-    <label for="passwordUser">Contraseña</label>
-    <input type="password" name="password" id="passwordUser" required>
+        <label for="passwordUser">Contraseña</label>
+        <input type="password" name="password" id="passwordUser" required>
 
-    <input type="submit" value="Login">
-    <input type="button" id="acceso-rapido" value="Acceso rapido">
-</form>
+        <div class="login-botonera">
+            <input type="submit" value="Login">
+            <input type="button" id="acceso-rapido" value="Acceso rapido">
+        </div>
+       
+    </form>
+
+</main>
+
+
 
 
 <script>
     // Funcionalidad boton acceso rapido
-    let emailUser = document.getElementById("emailUser");
+    let correolUser = document.getElementById("correoUser");
     let passwordUser = document.getElementById("passwordUser");
 
     let acceso_rapido = document.getElementById("acceso-rapido");
 
     acceso_rapido.addEventListener("click", () => {
-        emailUser.value = "test@test.com";
-        passwordUser.value = "test"
+        correoUser.value = "admin@admin";
+        passwordUser.value = "admin"
     });
 </script>
 

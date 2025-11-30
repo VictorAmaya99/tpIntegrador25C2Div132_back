@@ -1,55 +1,63 @@
 <%- include("partials/head.ejs") %>
+<%- include("partials/header-logo.ejs") %>
 <%- include("partials/nav.ejs") %>
 
-<main>
-    <h1>Crear producto</h1>
+ <h1> <%= about %> </h1>
+<main id="alta-container">
     
-    <!-- A menos que enviemos este formulario con el envio nativo del formulario HTML, no necesitamos poner ni action ni method -->
-    <form id="altaProducts-form" class="products-form-amplio">
+    <div id="productos-container" class="form-container">
         
-        <label for="nombreProd">Nombre</label>
-        <input type="text" name="nombre" id="nombreProd" required>
-        <br>
+        <h3>Alta productos</h3>
+        
+         <form id="altaProducts-form" class="form-alta">
+        
+            <label for="nombreProd">Nombre</label>
+            <input type="text" name="nombre" id="nombreProd" required>
+            <br>
 
-        <label for="imagenProd">Imagen</label>
-        <input type="text" name="imagen" id="imagenProd" required>
-        <br>
+            <label for="imagenProd">Imagen</label>
+            <input type="text" name="imagen" id="imagenProd" required>
+            <br>
 
-        <label for="tipoProd">Tipo</label>
-        <select name="tipo" id="tipoProd" required>
-            <option value="femenino">femenino</option>
-            <option value="masculino">masculino</option>
-        </select>
-        <br>
+            <label for="tipoProd">Tipo</label>
+            <select name="tipo" id="tipoProd" required>
+                <option value="femenino">femenino</option>
+                <option value="masculino">masculino</option>
+            </select>
+            <br>
 
-        <label for="precioProd">Precio</label>
-        <input type="number" name="precio" id="precioProd" required>
-        <br>
+            <label for="precioProd">Precio</label>
+            <input type="number" name="precio" id="precioProd" required>
+            <br>
 
-        <input type="submit" value="Crear producto">
+            <input type="submit" value="Crear producto">
 
-    </form>
+        </form>
+    </div>   
 
     <hr>
 
+    <div id="usuarios-container" class="form-container">
+        <h3>Alta usuarios</h3>
+        <form id="altaUsers-container" class="form-alta">
+            <label for="nombreUser">Nombre</label>
+            <input type="text" name="nombre" id="nombreUser" required>
+
+            <label for="correoUser">Email</label>
+            <input type="email" name="correo" id="correolUser" required>
+
+            <label for="passwordUser">Password</label>
+            <input type="password" name="password" id="passwordUser" required>
+
+            <input type="submit" value="Crear usuario">
+        </form>
+
+    </div>
+
        <!-- Formulario para crear usuarios y enviarlos a /api/users -->
-     <h3>Alta usuarios</h3>
-    <form id="altaUsers-container">
-        <label for="nombreUser">Nombre</label>
-        <input type="text" name="nombre" id="nombreUser" required>
+    
 
-        <label for="emailUser">Email</label>
-        <input type="email" name="correo" id="emailUser" required>
-
-        <label for="passwordUser">Password</label>
-        <input type="password" name="password" id="passwordUser" required>
-
-        <input type="submit" value="Crear usuario">
-    </form>
-
-
-        <hr>
-        <div id="contenedor-productos"></div>
+       
 </main>
 
     
