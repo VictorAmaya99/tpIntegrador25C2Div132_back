@@ -104,7 +104,7 @@ header li{
     justify-content: space-between;
     align-items: center;
     border: 2px solid;
-    margin-left: 250px;
+    /* margin-left: 250px; */
     background-color: #96e5dd;
    
 }
@@ -218,12 +218,34 @@ header li{
     border: 2px, solid;
 }
 
-.seccion-consultar {
+.seccion-consultar{ 
+
     border: 2px solid;
-    text-align: center;    
     background: #ffffffd0;
-    
-    
+    display: flex;             /* activa flexbox */
+    flex-direction: column;    /* coloca el contenido uno debajo del otro */
+    align-items: center;       /* centra horizontalmente */
+    justify-content: center;   /* centra verticalmente */
+    padding: 20px; 
+}
+
+.seccion-actualizar {
+    /* border: 2px solid; */
+    background: #ffffffd0;
+    display: flex;             /* activa flexbox */
+    flex-direction: column;    /* coloca el contenido uno debajo del otro */
+    align-items: center;       /* centra horizontalmente */
+    justify-content: center;   /* centra verticalmente */
+    padding: 20px 20px;
+}
+
+.seccion-eliminar {
+    background: #ffffffd0;
+    display: flex;             /* activa flexbox */
+    flex-direction: column;    /* coloca el contenido uno debajo del otro */
+    align-items: center;       /* centra horizontalmente */
+    justify-content: center;   /* centra verticalmente */
+    padding: 20px 20px;
 }
 
 .products-form-amplio {
