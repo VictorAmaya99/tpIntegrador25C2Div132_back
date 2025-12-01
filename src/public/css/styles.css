@@ -3,6 +3,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #96e5dd;
 }
 
 header,
@@ -145,11 +146,14 @@ header li{
     align-items: center;
     height: 350px;
     justify-content: space-evenly;
+    border: 2px, solid;
+    background-image: url("../img/fondo.jpg")
 }
 
 .login-botonera {
     display: flex;
     justify-content: space-evenly;
+    padding-top: 20px;
 }
 
 
@@ -186,4 +190,14 @@ header li{
     display: flex;
     align-items: center;
     font-size: 12px;
+}
+
+.pagina-login {
+    text-align: center;    
+    background: #ffffffd0;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: #96e5dd;
+    border: 2px, solid;
 }

@@ -2,28 +2,31 @@
 <%- include("partials/header-logo.ejs") %>
 
 <main id="login-container">
-    <h1>Login dashboard</h1>
-    <!-- Mostramos el mensaje de error del endpoint -->
-    <% if (typeof error !== "undefined") { %>
-        <div class="error-message">
-            <%= error %>
-        </div>
-    <% } %> 
+    <section class="pagina-login">
+         <h1>Login dashboard</h1>
+        <!-- Mostramos el mensaje de error del endpoint -->
+        <% if (typeof error !== "undefined") { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+        <% } %> 
 
-    <form action="/login" method="POST" autocomplete="off" id="login-form">
+        <form action="/login" method="POST" autocomplete="off" id="login-form">
 
-        <label for="correoUser">Correo</label>
-        <input type="email" name="correo" id="correoUser" required>
+            <label for="correoUser">Correo</label>
+            <input type="email" name="correo" id="correoUser" required>
 
-        <label for="passwordUser">Contraseña</label>
-        <input type="password" name="password" id="passwordUser" required>
+            <label for="passwordUser">Contraseña</label>
+            <input type="password" name="password" id="passwordUser" required>
 
-        <div class="login-botonera">
-            <input type="submit" value="Login">
-            <input type="button" id="acceso-rapido" value="Acceso rapido">
-        </div>
-       
-    </form>
+            <div class="login-botonera">
+                <input type="submit" value="Login">
+                <input type="button" id="acceso-rapido" value="Acceso rapido">
+            </div>
+        
+        </form>
+    </section>
+   
 
 </main>
 
