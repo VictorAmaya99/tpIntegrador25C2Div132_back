@@ -3,16 +3,20 @@
 <%- include("partials/nav.ejs") %>
 
 <main>
-    <h1> <%= about %> </h1>
+    <section class="seccion-consultar">
+        <h1> <%= about %> </h1>
+    
+        <form id="getProducts-form" class="products-form">
 
-    <form id="getProducts-form" class="products-form">
+            <label for="idProd">Id del producto</label>
+            <input type="number" name="id" id="idProd" required >
 
-        <label for="idProd">Id del producto</label>
-        <input type="number" name="id" id="idProd" required >
+            <input type="submit" value="Consultar producto">
+        </form>
 
-        <input type="submit" value="Consultar producto">
-    </form>
+    </section>
 
+    
     <hr>
     <div id="contenedor-productos">
         <ul id="listado-productos"></ul>
