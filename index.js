@@ -203,6 +203,50 @@ app.post("/logout", (req, res) => {
     });
 });
 
+//Endpoint para crear venta
+app.post("/api/ventas", async (req, res) => {
+    try {
+        // Recibimos los datos del cuerpo de la peticion HTTP
+        let { precio_total, nombre_usuario, productos } = req.body;
+
+        // Validacion de datos obligatorios
+        if(!precio_total || !nombre_usuario || !Array.isArray(productos)) {
+            return res.status(400).json({
+                message: "Datos invalidos, debes enviar date, total_price, user_name y products (array)"
+            });
+        }
+
+        // 1. Insertar la venta en la tabla "sales"
+        const sqlSale = "INSERT INTO ventas (precio_total, nombre_usuario) VALUES (?, ?)";
+        const [saleResult] = await connection.query(sqlSale, [precio_total, nombre_usuario]);
+
+        // 2. Obtenemos el id de la venta recien creada
+        const saleId = saleResult.insertId;
+
+        // 3. Insertamos los productos en "product_sales"
+        const sqlProductSale = "INSERT INTO ventas_productos (venta_id, producto_id) VALUES (?, ?)";
+
+        // Como tenemos una relacion N a N, debemos insertar una fila por cada producto vendido
+        for (const productId of productos) {
+            await connection.query(sqlProductSale, [saleId, productId]);
+        }
+
+        // Respuesta de exito
+        res.status(201).json({
+            message: "Venta registrada con exito!"
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error interno del servidor",
+            error: error.message
+        })
+    }
+})
+
+
 
 
 app.listen(PORT, () => {
