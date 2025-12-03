@@ -2,7 +2,12 @@
 
 import ProductModel from "../models/product.models.js";
 
-// GET all products -> Traer todos los productos
+/* =================================================
+    GET all products -> Traer todos los productos.
+
+    - Llama al modelo para obtener todos los productos.
+    - Devuelve un JSON con la lista y un mensaje.
+=====================================================*/
 export const getAllProducts = async (req, res) => {
     try {                      
         const [rows, fields] = await ProductModel.selectAllProducts();
@@ -23,7 +28,15 @@ export const getAllProducts = async (req, res) => {
     }
 }
 
-// GET product by id -> Consultar producto por id
+/*=================================================== 
+    GET product by id -> Consultar producto por id
+
+    - Toma el id de la URL.
+    - Consulta en la base de datos. 
+    - Si no existe, devuelve error 404.
+    - Si existe, devuelve el producto.
+======================================================*/
+
 export const getProductoById = async (req, res) => {    
     try {
         
@@ -57,7 +70,13 @@ export const getProductoById = async (req, res) => {
     }
 }
 
-// POST -> Crear nuevo producto
+/*========================================
+    POST -> Crear nuevo producto
+    - Toma los datos enviados en el body.
+    - Valida que estén completos.
+    - Inserta el producto en la base.
+    - Devuelve un mensaje de éxito.
+===========================================*/ 
 export const createProduct = async (req, res) => {
     try {
         // Extraemos e imprimimos los datos del body para ver si llegan correctamente
@@ -91,7 +110,14 @@ export const createProduct = async (req, res) => {
     }
 }
 
-// PUT -> Actualizar producto
+/*================================
+    PUT -> Actualizar producto
+
+    - Toma los datos del body.
+    - Valida que estén todos los campos.
+    - Actualiza el producto en la base.
+    - Devuelve mensaje según si se actualizó o no.
+==================================*/ 
 export const modifyProduct = async (req, res) => {
     try {                       
             let {id, nombre, precio, tipo, imagen, activo} = req.body;
@@ -130,7 +156,14 @@ export const modifyProduct = async (req, res) => {
     }
 }
 
-// DELETE => Eliminar producto
+/*==============================================
+    DELETE => Eliminar producto
+    
+    - Toma el id de la URL.
+    - Elimina el producto en la base.
+    - Confirma si realmente se eliminó.
+    - Devuelve el mensaje correspondiente.
+=================================================*/ 
 export const removeProduct = async (req, res) => {
     try {
 

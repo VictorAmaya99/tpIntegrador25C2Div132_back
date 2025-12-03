@@ -1,3 +1,14 @@
+/*==============================================================================
+
+    view.route.js:
+    - Este archivo define todas las rutas que muestran vistas (páginas) en tu aplicación, usando EJS como motor de plantillas.
+    - Cuando el usuario ingresa a una URL, Express debe renderizar una vista EJS.
+    - Algunas vistas requieren estar logueado, por eso se usa el middleware requireLogin.
+
+    - Este archivo maneja todas las rutas que muestran vistas EJS y protege la mayoría de ellas usando el middleware de login.
+
+================================================================================*/
+
 // Importamos el middleware requireLogin
 import { Router } from "express";
 import { requireLogin } from "../middlewares/middlewares.js";

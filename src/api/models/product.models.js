@@ -1,3 +1,10 @@
+/*===================================================
+    Es parte del modelo MVC:
+    - Se encarga de hablar directamente con la base de datos.
+    - Ejecuta las consultas SQL.
+    - Solo ejecuta consultas y devuelve resultados
+=====================================================*/
+
 import connection from "../database/db.js";
 
 //Traer todos los productos 

@@ -1,3 +1,12 @@
+/*================================================================
+
+    Archivo middleware.js sirve:
+    - Este archivo contiene middlewares, es decir, funciones que se ejecutan antes de llegar a una ruta para: validar, registrar, proteger y modificar request.
+    - Son funciones que ayudan a controlar el flujo de la aplicación Express.
+
+==================================================================*/
+
+
 // Middleware logger que muestra por consola todas las solicitudes
 const loggerUrl = (req, res, next) => {
     console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);    

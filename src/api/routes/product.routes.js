@@ -1,3 +1,14 @@
+/*=======================================================================================
+    product.routes.js:
+    - Este archivo define todas las rutas de API relacionadas con los productos y conecta cada ruta con su controlador correspondiente.
+    - Organiza y centraliza los endpoints del módulo “productos”.
+👉 - Indica qué controlador debe ejecutarse para cada ruta HTTP.
+👉 - Aplica middlewares específicos como validateId.
+
+    Es parte del patrón MVC, donde este archivo es la R de Routes.
+=========================================================================================*/
+
+
 import { Router } from "express";
 const router = Router();
 
