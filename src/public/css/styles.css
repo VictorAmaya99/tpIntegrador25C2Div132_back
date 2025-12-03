@@ -109,18 +109,27 @@ header li{
    
 }
 
-#alta-container .seccion-alta{
+#alta-container {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: space-between;
+    flex-direction: column;
     margin-top: 25px;
     margin-right: 50px;
     margin-left: 50px;
+   
+}
+
+.seccion-alta {    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+   
 }
 
 #alta-container{
-    /* background-color: white;
-     */
+    text-align: center;
      background: #ffffffd0;
      padding-bottom: 20px;
 }
@@ -218,6 +227,8 @@ header li{
     border: 2px, solid;
 }
 
+
+
 .seccion-consultar{ 
 
     border: 2px solid;
@@ -262,3 +273,4 @@ header li{
     padding: 20px 20px;
    
 }
+
