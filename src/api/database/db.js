@@ -2,7 +2,7 @@
     Usando archivo db.js:
     - Este archivo crea una conexión reutilizable a MySQL usando datos del .env.
     - La exporta para que el resto del proyecto pueda hacer consultas.
-*/
+=================================================================*/
 
 // Importamos la libreria mysql2 con promesas
 import mysql from "mysql2/promise"; 

@@ -4,7 +4,6 @@ import ProductModel from "../models/product.models.js";
 
 /* =================================================
     GET all products -> Traer todos los productos.
-
     - Llama al modelo para obtener todos los productos.
     - Devuelve un JSON con la lista y un mensaje.
 =====================================================*/
@@ -30,7 +29,6 @@ export const getAllProducts = async (req, res) => {
 
 /*=================================================== 
     GET product by id -> Consultar producto por id
-
     - Toma el id de la URL.
     - Consulta en la base de datos. 
     - Si no existe, devuelve error 404.
@@ -112,7 +110,6 @@ export const createProduct = async (req, res) => {
 
 /*================================
     PUT -> Actualizar producto
-
     - Toma los datos del body.
     - Valida que estén todos los campos.
     - Actualiza el producto en la base.
@@ -157,8 +154,7 @@ export const modifyProduct = async (req, res) => {
 }
 
 /*==============================================
-    DELETE => Eliminar producto
-    
+    DELETE => Eliminar producto    
     - Toma el id de la URL.
     - Elimina el producto en la base.
     - Confirma si realmente se eliminó.
