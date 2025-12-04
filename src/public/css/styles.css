@@ -106,6 +106,7 @@ header li{
     border: 2px solid;
     /* margin-left: 250px; */
     background-color: #96e5dd;
+    border-radius: 10px;
    
 }
 
@@ -130,17 +131,17 @@ header li{
 
 #alta-container{
     text-align: center;
-     background: #ffffffd0;
+     background: #efdbd9;
      padding-bottom: 20px;
 }
 
 #modificar-container {
-    background: #ffffffd0;
+    /* background: #efdbd9; */
     text-align: center;
 }
 
 #eliminar-container {
-    background: #ffffffd0;
+    /* background: #ffffffd0; */
     text-align: center;
 }
 
@@ -151,10 +152,12 @@ header li{
     flex-direction: column;
     justify-content: space-between;
     background-color: #96e5dd;
+    border-radius: 10px;
+    width: 250px;
 }
 
 .form-container h3 {
-    margin: 0;
+    margin: 0;    
 }
 
 .form-alta {
@@ -232,7 +235,7 @@ header li{
 .seccion-consultar{ 
 
     border: 2px solid;
-    background: #ffffffd0;
+    background: #efdbd9;
     display: flex;             /* activa flexbox */
     flex-direction: column;    /* coloca el contenido uno debajo del otro */
     align-items: center;       /* centra horizontalmente */
@@ -242,7 +245,7 @@ header li{
 
 .seccion-actualizar {
     /* border: 2px solid; */
-    background: #ffffffd0;
+    background: #efdbd9;
     display: flex;             /* activa flexbox */
     flex-direction: column;    /* coloca el contenido uno debajo del otro */
     align-items: center;       /* centra horizontalmente */
@@ -250,8 +253,9 @@ header li{
     padding: 20px 20px;
 }
 
+
 .seccion-eliminar {
-    background: #ffffffd0;
+    background: #efdbd9;
     display: flex;             /* activa flexbox */
     flex-direction: column;    /* coloca el contenido uno debajo del otro */
     align-items: center;       /* centra horizontalmente */
@@ -268,9 +272,39 @@ header li{
     justify-content: space-between;
     align-items: center;
     border: 2px solid;
-    margin-left: 250px;
+    margin-top: 25px;
     background-color: #96e5dd;
     padding: 20px 20px;
+    border-radius: 10px;
+
    
 }
 
+
+.btn-logout {
+    padding: 10px;
+    background-color: #623b59;
+    color: #c0b3cd;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.btn-logout:hover {
+    background-color: #efdbd9;
+    color: #4a3665;
+}
+
+#listado-productos {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contenedor-formulario {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    /* align-items: center; */
+    background-color: #efdbd9;
+}

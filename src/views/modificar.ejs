@@ -3,8 +3,9 @@
 <%- include("partials/nav.ejs") %>
 
 <main id="modificar-container">
-    <h1> <%= about %> </h1>
+   
     <section class="seccion-actualizar">
+         <h1> <%= about %> </h1>
         <form id="getProducts-form" class="products-form">
 
             <label for="idProd">Id del producto</label>
@@ -13,12 +14,11 @@
             <input type="submit" value="Consultar producto">
         </form>
     </section>
-    
-
     <hr>
     <div id="contenedor-productos">
         <ul id="listado-productos"></ul>
-    </div>        
+    </div>    
+    <hr>    
     <!-- Contenedor para volcarle el HTML del nuevo formulario modificar -->
     <section id="contenedor-formulario"></section>
 </main>

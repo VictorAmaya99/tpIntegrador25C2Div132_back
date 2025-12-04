@@ -77,6 +77,7 @@ function crearFormularioPut(event, producto) {
     console.table(producto); // Recibimos el producto para llenar los valores del formulario
 
     let formularioPutHtml = `
+    
         <form id="updateProducts-form" class="products-form-amplio">
 
             <input type="hidden" name="id" value="${producto.id}">
