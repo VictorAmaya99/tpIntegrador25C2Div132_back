@@ -142,50 +142,6 @@ app.post("/login", async (req, res) => {
      }
 });
 
-// app.post("/login", async (req, res) => {
-//     try {
-//         const { correo, password } = req.body;
-
-//         // Validacion 1: Evitamos consulta innecesaria
-//         if(!correo || !password) {
-//             return res.render("login", {
-//                 title: "Login",
-//                 // about: "Login dashboard",
-//                 error: "Todos los campos son obligatorios"
-//             });
-//         }
-
-//         const sql = "SELECT * FROM usuarios WHERE correo = ? AND password = ?";
-//         const [rows] = await connection.query(sql, [correo, password]);
-
-//         // Validacion 2: Verificamos si existe este email y password
-//         if(rows.length === 0) {
-//             return res.render("login", {
-//                 title: "Login",
-//                 about: "Login dashboard",
-//                 error: "Credenciales incorrectas"
-//             })
-//         }
-
-//         // console.log(rows);
-//         const user = rows[0];
-//         console.table(user);
-
-//         // Con el email y el password validos, guardamos la sesion
-//         req.session.user = {
-//             id: user.id,
-//             nombre: user.nombre,
-//             correo: user.correo
-//         }
-
-//         res.redirect("/"); // Redirigimos a la pagina principal
-        
-
-//     } catch (error) {
-//         console.error("Error en el login", error);
-//     }
-// });
-
 // Endpoint para /logout 
 app.post("/logout", (req, res) => {
     // Destruimos la sesion
